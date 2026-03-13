@@ -1,0 +1,10 @@
+This is a package to carry out the average PDOS using VASP after you finish MD simulation from CPMD.
+I assume that you have a TRAJEC.xyz file which stores the XYZ coordinates of thousands steps and you want to calculate the PDOS of selected steps and then get average.
+
+1. Open the automate file, edit the step number in the "for" loop. For example, I want to calculate step 65001 and 70001
+2. then type ./automate on asahi, you will calculate the PDOS of the step 65001 and 70001 in two directories: step_65001 and step_70001
+3. after the VASP caluclations finish, you may find the subfolders "dos" in the two directories. There are dos files we want to get average
+4. type ./make_dos to get the average value of PDOS of the two steps 65001 and 70001
+
+Pre-requirement: you must install sumo-dosplot to python3
+ 
