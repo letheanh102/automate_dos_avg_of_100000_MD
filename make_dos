@@ -1,0 +1,40 @@
+printf %s "awk -f avg.awk" >tmp_C
+
+for step in $(seq 20001 5000 110001)
+do
+cp ./step_${step}/dos/C_dos.dat ./C_dos_${step}.dat
+printf %s " C_dos_${step}.dat" >>tmp_C  
+done
+printf %s " > C_avg.dat" >>tmp_C
+
+printf %s "awk -f avg.awk" >tmp_B
+for step in $(seq 20001 5000 110001)
+do
+cp ./step_${step}/dos/B_dos.dat ./B_dos_${step}.dat
+printf %s " B_dos_${step}.dat" >>tmp_B
+done
+printf %s " > B_avg.dat" >>tmp_B
+
+printf %s "awk -f avg.awk" >tmp_H
+for step in $(seq 20001 5000 110001)
+do
+cp ./step_${step}/dos/H_dos.dat ./H_dos_${step}.dat
+printf %s " C_dos_${step}.dat" >>tmp_H
+done
+printf %s " > H_avg.dat" >>tmp_H
+
+printf %s "awk -f avg.awk" >tmp_O
+for step in $(seq 20001 5000 110001)
+do
+cp ./step_${step}/dos/O_dos.dat ./O_dos_${step}.dat
+printf %s " O_dos_${step}.dat" >>tmp_O
+done
+printf %s " > O_avg.dat" >>tmp_O
+
+chmod +x tmp_C tmp_B tmp_H tmp_O
+./tmp_C
+./tmp_B
+./tmp_H
+./tmp_O
+
+rm tmp* *_dos_*.dat

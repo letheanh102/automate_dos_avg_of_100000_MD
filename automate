@@ -1,0 +1,24 @@
+for step in $(seq 20001 5000 110001)
+do
+
+cat <<EOF > GEOMETRY_T300_${step}.xyz
+603
+EOF
+
+grep "STEP:       ${step}" TRAJEC.xyz -A 603 >> GEOMETRY_T300_${step}.xyz
+
+mv GEOMETRY_T300_${step}.xyz GEOMETRY_T300.xyz
+
+python2.7 jobrun.py
+mv GEOMETRY_T300.INCAR_scf INCAR_scf
+mv GEOMETRY_T300.INCAR_dos INCAR_dos
+mv GEOMETRY_T300.POSCAR POSCAR_origin
+
+mkdir step_${step}
+
+mv INCAR_scf INCAR_dos POSCAR_origin ./step_${step}
+cp POTCAR KPOINTS_* A.sh ./step_${step}
+cd ./step_${step}/
+#qsub2 A.sh
+cd ../
+done
